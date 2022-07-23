@@ -11,7 +11,8 @@ async def test_mux(dut):
     cocotb.log.info('##### CTB Challenge: Here is my test ########')
     
     #Generate random 2-bit values for the 31 inputs of the Mux
-    inp_test = [random.randint(0, 3) for item in range(31)]   #stores the value
+    #and stores the values
+    inp_test = [random.randint(0, 3) for item in range(31)]
 
 
     #assign these random 2-bit values to each input of the Mux
