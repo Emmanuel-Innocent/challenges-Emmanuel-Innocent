@@ -47,16 +47,16 @@ async def test_mux(dut):
     dut.inp28.value = inp_test[28]
     dut.inp29.value = inp_test[29]
     dut.inp30.value = inp_test[30]
-    #dut.inp31.value = inp_test[31]
+    
 
     #out_test = [inp_test[index] for index in range(32)]
     print("This is the list of the 31 randomly generated 2-bit mux input: ", inp_test)
 
     #This loop should be repeated for at least 31 times
     #reason: (1) assuming the worst-case scenario where the bug is due to only
-    #one selector value, numbers may be generated for each of the selector
+    #one selector value. Numbers may be generated for each of the selector
     #values such that the selector value with the bug may be generated
-    #at the last iteration (2) with a short iteration,
+    #at the last iteration (2) with short iteration,
     #the selector value with the bug may never be generated,
     #so iteration should be longer to increase the chance of capturing the bug
 
