@@ -11,7 +11,7 @@ async def test_mux(dut):
     cocotb.log.info('##### CTB Challenge: Here is my test ########')
     
     #Generate random 2-bit values for the 31 inputs of the Mux
-    #and stores the values
+    #and store the values
     inp_test = [random.randint(0, 3) for item in range(31)]
 
 
@@ -62,11 +62,11 @@ async def test_mux(dut):
 
     for i in range(64):
 
-        #Generates a 5-bit number for the selector of the Mux.
+        #Generate a 5-bit number for the selector of the Mux.
         #Value 31 will not be generated since it's a 31-input Mux 
         Sel = random.randint(0, 30)
 
-        dut.sel.value = Sel  #assigns to the selector of the DUT
+        dut.sel.value = Sel  #assign to the selector of the DUT
 
         await Timer(2, units='ns')
 
