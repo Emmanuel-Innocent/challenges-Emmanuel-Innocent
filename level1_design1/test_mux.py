@@ -56,11 +56,13 @@ async def test_mux(dut):
     #reason: (1) assuming the worst-case scenario where the bug is due to only
     #one selector value. Numbers may be generated for each of the selector
     #values such that the selector value with the bug may be generated
-    #at the last iteration (2) with short iteration,
+    #at the last iteration. (2) with short iteration,
     #the selector value with the bug may never be generated,
     #so iteration should be longer to increase the chance of capturing the bug
 
-    for i in range(64):
+    count_failure = 0
+
+    for cycle in range(33):
 
         #Generate a 5-bit number for the selector of the Mux.
         #Value 31 will not be generated since it's a 31-input Mux 
@@ -71,6 +73,22 @@ async def test_mux(dut):
         await Timer(2, units='ns')
 
         dut._log.info(f'selector={Sel}  sel_in_binary = {bin(Sel)[2:]} model={inp_test[Sel]}  DUT={int(dut.out.value)}')
-        assert dut.out.value == inp_test[Sel], "Randomised test failed with: {output_DUT}  != {output_model}".format(
-            output_DUT = int(dut.out.value), output_model= inp_test[Sel])
+        try:
+            assert dut.out.value == inp_test[Sel]
+        except:
+            count_failure = count_failure + 1
+            #print(count_failure)
+            print("Test failed, DUT output value: ", dut.out.value, "not equal to", "expected output value: ",
+            inp_test[Sel], "with selector value: ", Sel)
+            print("\n")
+             
+        else:
+            print("Test passed for this selector value")
+            print("\n")
+
+
+
+        """assert dut.out.value == inp_test[Sel], "Randomised test failed with: {output_DUT}  != {output_model}".format(
+            output_DUT = int(dut.out.value), output_model= inp_test[Sel])"""
+    assert count_failure <= 0, "Test failed. Count_failure = {count_failure}".format(count_failure = count_failure)
 
