@@ -34,8 +34,8 @@ async def test_seq_bug1(dut):
         seq_inp = random.randint(0,1)      #generate a 1-bit random number
         
         print("bit sequence:", seq_inp)
-        dut.inp_bit.value = seq_inp       #feed the generated number in as input
-        x = seq_inp                       #assign the number to the input of the golden FSM model
+        dut.inp_bit.value = seq_inp       #feed in the generated number to the input of the DUT
+        x = seq_inp                       #also assign the number to the input of the "golden" FSM model
         
         #the next state logic of the golden model:
         #given the current state and input
@@ -44,14 +44,14 @@ async def test_seq_bug1(dut):
         N1 = (s0&~x) | (s1&~s0&x)
         N0 = (~s2&~s0&x) | (~s2&~s1&x) | (~s1&s0&x)
 
-        #at positive edge of the clock let the
-        #assign the next_state as current state of the golden model
+        #at positive edge of the clock assign the next state
+        #to the current state of the golden model
         await RisingEdge(dut.clk)
         s2 = N2
         s1 = N1
         s0 = N0
         
-        await Timer(2.5, units = "us") #wait for the state and output to become stable before reading
+        await Timer(2.5, units = "us")    #wait for the current state and output to become stable before reading their values
         print("current state of the device under test(DUT): ", dut.current_state.value)
         dut_current_state = dut.current_state.value
         print("current state of the golden model: ", s2, s1 , s0)
@@ -59,6 +59,8 @@ async def test_seq_bug1(dut):
         #the output logic of the golden model:
         output = (s2&~s0) | (s2&~s1)
 
+        #check if the current state of the golden model and DUT are equivalent
+        #and if their outputs are identical
         assert dut_current_state[2] == s0,   "the DUT and the golden model did not transition to equivalent state"
         assert dut_current_state[1] == s1,   "the DUT and the golden model did not transition to equivalent state"
         assert dut_current_state[0] == s2,   "the DUT and the golden model did not transition to equivalent state"
