@@ -85,6 +85,7 @@ async def test_mux(dut):
         else:
             print("Test passed for this selector value")
             print("\n")
+            
 
 
 
