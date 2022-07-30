@@ -49,4 +49,4 @@ Highlighted below were the step taken to capture the bug in the MUX design:
     ```
 - The behavioural descriprion of the golden model is:
 
-  mux_out = inp_test[Sel]`
+  `mux_out = inp_test[Sel]`
