@@ -8,7 +8,7 @@ The contrained random verification (CRV) strategy was used in the test of the mu
 This test is a [CoCoTB](https://www.cocotb.org/) Python based test. With the rich Python libraries a randomised test (CRV) -- as descibed in the Verification srategy above -- was done.
 
 Highlighted below were the step taken to capture the bug in the MUX design:
-- After importing the relevant modules, thirty one (31) 2-bit numbers were randomly generated. This numbers were saved in a list and assign to the input of the DUT..
+- After importing the relevant modules, thirty one (31) 2-bit numbers were randomly generated. This numbers were saved in a list and assign to the input of the DUT.
 ```
 #Generate random 2-bit values for the 31 inputs of the Mux
     #and store the values
@@ -48,6 +48,7 @@ Highlighted below were the step taken to capture the bug in the MUX design:
     dut.inp30.value = inp_test[30]
     ```
 - The behavioural descriprion of the golden model is:
+
 ```
 mux_out = inp_test[Sel]
 ```
