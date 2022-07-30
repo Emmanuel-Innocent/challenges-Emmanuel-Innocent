@@ -46,6 +46,7 @@ Highlighted below were the step taken to capture the bug in the MUX design:
     dut.inp28.value = inp_test[28]
     dut.inp29.value = inp_test[29]
     dut.inp30.value = inp_test[30]
+    ```
     
 - The behavioural descriprion of the golden model is:
 
