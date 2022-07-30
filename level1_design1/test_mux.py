@@ -78,8 +78,8 @@ async def test_mux(dut):
         except:
             count_failure = count_failure + 1
             #print(count_failure)
-            print("Test failed, DUT output value: ", dut.out.value, "not equal to", "expected output value: ",
-            inp_test[Sel], "with selector value: ", Sel)
+            print("Test failed, DUT output value: ", dut.out.value, "not equal to expected output value: ",
+            bin(inp_test[Sel])[2:], "with selector value: ", bin(Sel)[2:])
             print("\n")
              
         else:
