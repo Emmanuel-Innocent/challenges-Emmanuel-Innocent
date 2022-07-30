@@ -89,7 +89,7 @@ for cycle in range(33):
 assert count_failure <= 0, "Test failed. Count_failure = {count_failure}".format(count_failure = count_failure)
 ```
 
-### Test Scenario
+# Test Scenario
 1. For inp_test = [1, 3, 1, 1, 1, 3, 0, 3, 2, 2, 2, 1, 1, 3, 3, 2, 1, 3, 3, 3, 3, 1, 2, 3, 1, 0, 0, 1, 3, 1, 0]
 - Test input(selector value): 01100
 - Expected output: 01
@@ -126,3 +126,5 @@ On checking the assignment for selector value 1100 and '01101', it was discovere
  5'b01111: out = inp15;
  5'b10000: out = inp16;
  ```
+# Design Fix
+The design has been fix with the correct assignments. The fixed design is in the file mux_fixed.v.
