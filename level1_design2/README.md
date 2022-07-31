@@ -37,6 +37,7 @@ x = seq_inp                       #also assign the number to the input of the "g
 
 - The next state logic of the "golden model" is being computed for every cycle. This is the next state logic function (recall it's a 3-bit encoded state, so one function derived for each bit):
 
+
 ```
 #the next state logic of the golden model:
 #given the current state and input
@@ -45,3 +46,27 @@ N2 = s1&s0&x
 N1 = (s0&~x) | (s1&~s0&x)
 N0 = (~s2&~s0&x) | (~s2&~s1&x) | (~s1&s0&x)
 ```
+
+- The curent state of the DUT and golden model are being "asserted" to check if they transitioned to equivalent states. Their outputs are being checked too.
+
+```
+#the output logic of the golden model:
+output = (s2&~s0) | (s2&~s1)
+
+#check if the current state of the golden model and DUT are equivalent
+#and if their outputs are identical
+assert dut_current_state[2] == s0,   "the DUT and the golden model did not transition to equivalent state"
+assert dut_current_state[1] == s1,   "the DUT and the golden model did not transition to equivalent state"
+assert dut_current_state[0] == s2,   "the DUT and the golden model did not transition to equivalent state"
+assert dut.seq_seen.value == output, "incorrect output sequence"
+cycle = cycle + 1 
+await FallingEdge(dut.clk)
+```
+
+## Test Scenerio
+1.
+- input bit:   expected state:   observed state:
+- input bit:   expected state:   observed state:
+- input bit:   expected state:   observed state:
+- input bit:   expected state:   observed state:
+- input bit:   expected state:   observed state:
