@@ -64,9 +64,38 @@ await FallingEdge(dut.clk)
 ```
 
 ## Test Scenerio
-1.
-- input bit:   expected state:   observed state:
-- input bit:   expected state:   observed state:
-- input bit:   expected state:   observed state:
-- input bit:   expected state:   observed state:
-- input bit:   expected state:   observed state:
+1. Initial state: IDLE, 000
+- input bit: 0   expected state: 000  observed state: 000
+- input bit: 1   expected state: 001  observed state: 001
+- input bit: 1   expected state: 001 observed state:  000
+```
+42500.00ns INFO     test_seq_bug1 failed
+               Traceback (most recent call last):
+                 File "/workspace/challenges-Emmanuel-Innocent/level1_design2/test_seq_detect_1011.py", line 64, in test_seq_bug1
+                   assert dut_current_state[2] == s0,   "the DUT and the golden model did not transition to equivalent state"
+               AssertionError: the DUT and the golden model did not transition to equivalent state
+```
+
+2. Initial state: IDLE, 000
+- input bit: 0   expected state: 000  observed state: 000
+- input bit: 0   expected state: 000  observed state: 000
+- input bit: 0   expected state: 000  observed state: 000
+- input bit: 1   expected state: 001  observed state: 001
+- input bit: 0   expected state: 010  observed state: 010
+- input bit: 0   expected state: 000  observed state: 000
+- input bit: 0   expected state: 000  observed state: 000
+- input bit: 1   expected state: 001  observed state: 001
+- input bit: 1   expected state: 001  observed state: 000
+
+```
+102500.00ns INFO     test_seq_bug1 failed
+                     Traceback (most recent call last):
+                       File "/workspace/challenges-Emmanuel-Innocent/level1_design2/test_seq_detect_1011.py", line 64, in test_seq_bug1
+                         assert dut_current_state[2] == s0,   "the DUT and the golden model did not transition to equivalent state"
+                     AssertionError: the DUT and the golden model did not transition to equivalent state
+```
+3. Initial state: IDLE, 000
+- input bit: 0   expected state: 000  observed state: 000
+- input bit: 0   expected state: 000  observed state: 000
+- input bit: 0   expected state: 000  observed state: 000
+- input bit: 1   expected state: 001  observed state: 001
