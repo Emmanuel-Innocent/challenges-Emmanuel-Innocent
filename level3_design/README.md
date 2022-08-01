@@ -15,7 +15,28 @@ This test is a [CoCoTb](https://www.cocotb.org/) Python based test.
 request_queue_tb = random.randint(0,15)       #a 4-bit number is generated for the four request lines
 dut.request_queue.value = request_queue_tb    #assign the number to the request line of the DUT
 ```
+- The "golden model" token value `token_tb` is computed with this function:
+```
+#this computes the ideal token value to be compared with the token value from the DUT
+N3 = token_tb[1]&E | token_tb[0]&~E
+N2 = token_tb[2]&E | token_tb[1]&~E
+N1 = token_tb[3]&E | token_tb[2]&~E
+N0 = token_tb[3]&~E | token_tb[0]&E
+```
 
+- The grant line of the golden model is then computed as the mask of the request line and the token:
+
+```
+#this computes the ideal token value to be compared with the token value from the DUT
+N3 = token_tb[1]&E | token_tb[0]&~E
+N2 = token_tb[2]&E | token_tb[1]&~E
+N1 = token_tb[3]&E | token_tb[2]&~E
+N0 = token_tb[3]&~E | token_tb[0]&E
+await Timer(2.999, units = "sec")    #the time quanta
+await RisingEdge(dut.clk)
+token_tb[3], token_tb[2], token_tb[1], token_tb[0] = N0, N1, N2, N3
+grant_out_tb = token_tb & request_queue_tb      #the token and request line are masked to give the grant output
+```
 
 ## Is the Verification Complete?
 The test was meant to only verify the functional behaviour of the simple round robin arbiter. No verification was done for timing analysis, etc.
