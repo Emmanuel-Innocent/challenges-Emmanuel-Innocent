@@ -15,3 +15,7 @@ This test is a [CoCoTb](https://www.cocotb.org/) Python based test.
 request_queue_tb = random.randint(0,15)       #a 4-bit number is generated for the four request lines
 dut.request_queue.value = request_queue_tb    #assign the number to the request line of the DUT
 ```
+
+
+## Is the Verification Complete?
+The test was meant to only verify the functional behaviour of the simple round robin arbiter. No verification was done for timing analysis, etc.
