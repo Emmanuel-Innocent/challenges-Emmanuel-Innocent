@@ -2,6 +2,7 @@
 Author  : Emmanuel Innocent
 Project : Round Robin Arbiter
 Email   : sherlockhudep7@gmail.com
+Licence : GNU GPL
 
 */
 
