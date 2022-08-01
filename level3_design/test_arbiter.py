@@ -41,7 +41,7 @@ async def test_seq_bug1(dut):
         await Timer(2.999, units = "sec")    #the time quanta
         await RisingEdge(dut.clk)
         token_tb[3], token_tb[2], token_tb[1], token_tb[0] = N0, N1, N2, N3
-        grant_out_tb = token_tb & request_queue_tb
+        grant_out_tb = token_tb & request_queue_tb      #the token and request line are masked to give the grant output
         await(5, units = "ns")
         
         assert grant_out == grant_out_tb, "the observed grant request line does not match the expected grant output"
