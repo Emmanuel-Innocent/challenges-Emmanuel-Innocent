@@ -1,9 +1,10 @@
 # Sequence Detector Verification
 
 ![Screenshot from 2022-07-30 11-44-34](https://user-images.githubusercontent.com/41594627/182002996-7ace628d-8bdd-4560-8181-6833fb666db4.png)
+**Fig.1 A screenshot showing my Gitpod id**
 
 ## Verification Strategy
-For this test, the device under test (DUT) is a sequence detector which was implemented as a finite State Machine (FSM). The technique employed in this test was Equivalence Check. Equivalence check involves checking the property of the DUT against the property of the "golden model". The property of the golden model is usually abstracted as a boolean (or logic) or mathematical function.
+For this test, the device under test (DUT) is a sequence detector which was implemented as a finite State Machine (FSM). The technique employed in this test was Equivalence Check. Equivalence check involves checking a property of the DUT against an equivalent property of the "golden model". The property of the golden model is usually abstracted as a boolean (or logic) or mathematical function.
 According to theory, two FSMs (especially Moore Machines) represented as black boxes are equivalent if:
 - for every finite input sequence, they produce identical output sequence
 - in addition, for Mealy Machine, they must transition to equivalent states for the same finite input sequence.
@@ -25,7 +26,7 @@ This test is a [CoCoTb](https://www.cocotb.org/) Python based test.
 ```
 
 -  A while loop was constructed to run for a long but finite time (say 100 times). This is because with many input sequence the bug will be easily captured.
-- In this loop a 1-bit random number is being generated for every cycle. This 1-bit number is asigned to  input of the DUT and "golden model"
+- In this loop a 1-bit random number is being generated for every cycle. This 1-bit number is asigned to the inputs of the DUT and "golden model"
 
 ```
 seq_inp = random.randint(0,1)      #generate a 1-bit random number
@@ -35,7 +36,7 @@ dut.inp_bit.value = seq_inp       #feed in the generated number to the input of 
 x = seq_inp                       #also assign the number to the input of the "golden" FSM model
 ```
 
-- The next state logic of the "golden model" is being computed for every cycle. This is the next state logic function (recall it's a 3-bit encoded state, so one function derived for each bit):
+- The next state logic of the "golden model" is being computed for every cycle. This is the next state logic function (recall it's a 3-bit encoded state, so a function derived for each bit):
 
 
 ```
@@ -47,7 +48,7 @@ N1 = (s0&~x) | (s1&~s0&x)
 N0 = (~s2&~s0&x) | (~s2&~s1&x) | (~s1&s0&x)
 ```
 
-- The curent state of the DUT and golden model are being "asserted" to check if they transitioned to equivalent states. Their outputs are being checked too.
+- The new curent states of the DUT and golden model are being "asserted" to check if they transitioned to equivalent states. Their outputs were also commpared.
 
 ```
 #the output logic of the golden model:
@@ -122,7 +123,7 @@ await FallingEdge(dut.clk)
 ```
 From the three results above, it is observed that an **assertion error** is usually raised when:
 - the previous state is SEQ_1 (encoded as '001') and the next input bit is '1'
-   - with that given previous state and input, the golden model transitions to state SEQ_1(encoded as '001'), that is, it remains in same state. This is valid because of overlapping(as defined in the design).
+   - with that given previous state and input, the golden model transitions to state SEQ_1(encoded as '001'), that is, it remains in the same state. This is valid because of overlapping(as defined in the design).
    - However, for the same previous state and input, the DUT transitions to state IDLE(encoded as '000'). This is incorrect as overlapping would not be taken care of in the design.
 - the previous state is SEQ_101 (encoded as '011') and the next input bit is '0'
   - with this given condition the golden model transitions to state SEQ_10(encoded as '010'). This is valid because of overlapping(as defined in the design).
@@ -160,7 +161,7 @@ The state transition from both states SEQ_1 and SEQ_101 have been corrected. The
 
 
 ![Screenshot from 2022-08-01 11-10-04](https://user-images.githubusercontent.com/41594627/182133102-f7e03eb6-548a-4415-8685-25389ce92e23.png)
-
+**Fig.2 A screenshot showing all test cases passed after the bugs were fixed.**
 
 
 
@@ -168,4 +169,4 @@ The state transition from both states SEQ_1 and SEQ_101 have been corrected. The
 
 ## Is The Verification Complete?
 The test was carried out to verify only the functionality(behaviour) of the DUT. No verification on the timing analysis was done.
-So, yes, the verification is complete for the state transition of the FSM.
+So, yes, the verification is complete for the behaviour ---in terms of state transition and output condition --- of the FSM.
