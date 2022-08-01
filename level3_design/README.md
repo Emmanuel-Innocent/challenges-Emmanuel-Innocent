@@ -38,5 +38,10 @@ token_tb[3], token_tb[2], token_tb[1], token_tb[0] = N0, N1, N2, N3
 grant_out_tb = token_tb & request_queue_tb      #the token and request line are masked to give the grant output
 ```
 
+- The grant output of the "golden model" and the DUT are then "asserted" to check for equivalence
+
+`assert grant_out == grant_out_tb, "the observed grant request line does not match the expected grant output"`
+
+
 ## Is the Verification Complete?
 The test was meant to only verify the functional behaviour of the simple round robin arbiter. No verification was done for timing analysis, etc.
