@@ -3,6 +3,11 @@
 
 ## Verification Strategy
 The contrained random verification (CRV) strategy was used in the test of the multiplexer (MUX), which was the device under test (DUT). In this verification test, randomly generated stimulus was applied to the selector port of the MUX. This process was looped for a fixed number of times, and for each cylce of the loop the output of the DUT was compared to the expected output(of the golden model). The diagram below describes how this process was carried out.
+![Untitled Diagram0](https://user-images.githubusercontent.com/41594627/182087234-90bd4083-29dd-400a-b9cf-cc846fa0ae15.jpg)
+![Untitled Diagram drawio(1)](https://user-images.githubusercontent.com/41594627/182087295-93d9480f-d239-4f8c-b094-16f05cdf8452.png)
+
+
+
 
 ### Verification Environment
 This test is a [CoCoTB](https://www.cocotb.org/) Python based test. With the rich Python libraries a randomised test (CRV) -- as descibed in the overview above -- was done.
