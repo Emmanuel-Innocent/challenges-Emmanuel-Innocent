@@ -12,15 +12,39 @@ from cocotb.binary import BinaryValue
 async def test_seq_bug1(dut):
     """Test for round robin arbiter """
 
-    clock = Clock(dut.clk, 10, units="us")  # Create a 10us period clock on port clk
+    # Create a 10us period clock on port clk:
+    #this arbiter was design for a 50MHz clock
+    #so a period of 20ns is needed
+    clock = Clock(dut.clk, 20, units="ns")  
     cocotb.start_soon(clock.start())        # Start the clock
 
     # reset
     dut.reset.value = 1
-    s2, s1, s0 = 0, 0, 0      #initialise the current state of the golden model to IDLE state
+    token_tb = 0b0001
     await FallingEdge(dut.clk)  
     dut.reset.value = 0
     await FallingEdge(dut.clk)
-    #cycle = 0
+    cycle = 0
 
     cocotb.log.info('#### CTB: Here is my verification test ######')
+    
+    while (cycle < 5):
+        request_queue_tb = random.randint(0,15)  #a 4-bit number is generated for the four request lines
+        dut.request_queue.value = request_queue_tb
+        E = 0b1   #enable line
+        
+        #this computes the ideal token value to be compared with the token value from the DUT
+        N3 = token_tb[1]&E | token_tb[0]&~E
+        N2 = token_tb[2]&E | token_tb[1]&~E
+        N1 = token_tb[3]&E | token_tb[2]&~E
+        N0 = token_tb[3]&~E | token_tb[0]&E
+        await Timer(2.999, units = "sec")    #the time quanta
+        await RisingEdge(dut.clk)
+        token_tb[3], token_tb[2], token_tb[1], token_tb[0] = N0, N1, N2, N3
+        grant_out_tb = token_tb & request_queue_tb
+        await(5, units = "ns")
+        
+        assert grant_out == grant_out_tb, "the observed grant request line does not match the expected grant output"
+        
+        cycle = cycle + 1
+        
