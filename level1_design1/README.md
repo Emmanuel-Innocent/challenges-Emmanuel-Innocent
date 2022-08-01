@@ -1,13 +1,15 @@
 # Multiplexer Design Verification
 ![Screenshot from 2022-07-30 11-44-34](https://user-images.githubusercontent.com/41594627/181907886-8d0b0b63-9384-43e4-8708-5a7792590389.png)
-                                                       fig.1 Screenshot showing my Gitpod id
- 
+                                                **fig.1 Screenshot showing my Gitpod id**
+
+
+
 ## Verification Strategy
 The contrained random verification (CRV) strategy was used in the test of the multiplexer (MUX), which was the device under test (DUT). In this verification test, randomly generated stimulus was applied to the selector port of the MUX. This process was looped for a fixed number of times, and for each cylce of the loop the output of the DUT was compared to the expected output(of the golden model). The diagram below describes how this process was carried out.
 
 
 ![Untitled Diagram drawio(1)](https://user-images.githubusercontent.com/41594627/182087295-93d9480f-d239-4f8c-b094-16f05cdf8452.png)
-                                                        fig.2 A diagram showing the verification process
+                                                 **fig.2 A diagram showing the verification process**
 
 
 ### Verification Environment
