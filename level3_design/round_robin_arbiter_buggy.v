@@ -67,7 +67,7 @@ always @ (current_state, request_queue) begin
 
         req_line_2 : begin
                         token = 4'b0010;
-                        next_state = req_line_3;
+                        next_state = req_line_1;    // <=== THE BUG! (next_state should be req_line_3 instead of req_line_1)
         end
 
         req_line_3 : begin
@@ -86,7 +86,7 @@ always @ (current_state, request_queue) begin
 end
 
 //Output Logic
-  assign grant_out[3:0] = token[3:0] | request_queue[3:0];    // ====>  THE BUG! ("&" instead of "|")
+  assign grant_out[3:0] = token[3:0] | request_queue[3:0];    // <===  THE BUG! ("&" instead of "|")
 
 
 
