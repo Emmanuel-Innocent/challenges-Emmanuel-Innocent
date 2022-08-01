@@ -5,7 +5,7 @@
 
 
 ## Verification Strategy
-The contrained random verification (CRV) strategy was used in the test of the multiplexer (MUX), which was the device under test (DUT). In this verification test, randomly generated stimulus was applied to the selector port of the MUX. This process was looped for a fixed number of times, and for each cylce of the loop the output of the DUT was compared to the expected output(of the golden model). The diagram below describes how this process was carried out.
+The contrained random verification (CRV) strategy was used in the test of the multiplexer (MUX) which was the device under test (DUT). In this verification test, randomly generated stimulus was applied to the selector port of the MUX. This process was looped for a fixed number of times, and for each cycle of the loop the output of the DUT was compared to the expected output(of the golden model). The diagram below describes how this process was carried out.
 
 
 ![Untitled Diagram drawio(1)](https://user-images.githubusercontent.com/41594627/182087295-93d9480f-d239-4f8c-b094-16f05cdf8452.png)
@@ -15,8 +15,8 @@ The contrained random verification (CRV) strategy was used in the test of the mu
 ### Verification Environment
 This test is a [CoCoTB](https://www.cocotb.org/) Python based test. With the rich Python libraries a randomised test (CRV) -- as descibed in the overview above -- was done.
 
-Highlighted below were the step taken to capture the bug in the MUX design:
-- After importing the relevant modules, thirty one (31) 2-bit numbers were randomly generated. These numbers were saved in a list and then assigned to the input of the DUT.
+Highlighted below are the steps taken to capture the bug in the MUX design:
+- After importing the relevant modules, thirty one (31) 2-bit numbers were randomly generated. These numbers were saved in a list and then assigned to the inputs of the DUT.
 
 
 ```
@@ -58,8 +58,8 @@ dut.inp29.value = inp_test[29]
 dut.inp30.value = inp_test[30]
 ```
 - The behavioural descriprion of the golden model is: `mux_out = inp_test[Sel]` .
-- A 5-bit number was randomly generated in a while loop and this 5-bit number was then assigned to the selector port of the DUT and the golden model. The while loop was constucted to run for at least 31 times. This is to carter for the case where the generator may generate the all the possible thirty-two 5-bit numbers in an exhaustve but random manner, with the selector value with the buggy selection coming last in the iteration. The value '31' was not to be generated since as it is a 31 input MUX(according to the design specification).
-- For every cycle of the loop the output of the DUT and golden model were "asserted". To prevent the loop from halting prematuredly when an assertion error is raised, error handling was employed, and a counter counts how many error is being encountered. Counter value of zero  means no error was raised and test cases were passed. The test was ran more than once to capture bugs as many as possible.
+- A 5-bit number was randomly generated in a while loop and this 5-bit number was then assigned to the selector port of the DUT and the golden model. The while loop was constucted to run for at least 31 times. This is to carter for the case where the generator may generate all the possible thirty-two 5-bit numbers in an exhaustve but random manner, with the selector value with the buggy selection coming last in the iteration. The value '31' was not to be generated as it is a 31 input MUX(according to the design specification).
+- For every cycle of the loop the output of the DUT and golden model were "asserted". To prevent the loop from halting prematurely when an assertion error is raised, error handling was employed, and a counter counts how many error is being encountered. Counter value of zero  means no error was raised and the test cases were passed. The test was ran more than once to capture bugs as many as possible.
 
 
 
@@ -117,10 +117,10 @@ assert count_failure <= 0, "Test failed. Count_failure = {count_failure}".format
 - Expected output: 11
 - Observed output: 00
 
-From the above results, there is mismatch when the selector value is either 01100 or 01101. The mismatch for selector value '11110' is due to the obvious reason that value '11110' was set to default value '00' in the design. So it may not be taken as a bug as it may have been intended by the designer.
+From the above results, there is mismatch when the selector value is either '01100' or '01101'. The mismatch for selector value '11110' is due to the obvious reason that value '11110' was set to default value '00' in the design. So it may not be taken as a bug as it may have been intended by the designer.
 
 ### Design Bug
-On checking the assignment for selector value 1100 and '01101', it was discovered that:
+On checking the assignment for selector values '1100 and '01101', it was discovered that:
 - assignment for '01100' was omitted hence the default ouput value '00' was always observed for it
 - assignment for '01101' was repeated twice (including where assignment for 01100 should have been). Hence the first wrong assignment will always be read for '01101'.
 
@@ -144,4 +144,4 @@ The design has been fix with the correct assignments. The fixed design is in the
 
 
 ## Is The Verification Complete?
-Yes it is. The DUT was tested for all valid inputs(the selector and MUX input). However, with how the test was designed selector value "30 (11110)" may be seen as having a bug. This is because in the design no unique value was assigned for selector value "30", it was assigned a default value '0'. But in the test module in order to capture all the possible bugs, a random but constrained value was assign to all individual inputs. Therefore, while running the test, assertion error may be raised for selector value "30". But the default value for input "30" may have been intended by the designer.
+Yes it is. The DUT was tested for all valid inputs(the selector and MUX input). However, with how the test was designed selector value "30 (11110)" may be seen as having a bug. This is because in the design, no unique value was assigned for selector value "30", it was assigned a default value '0'. But in the test module, in order to capture all the possible bugs, a random but constrained value was assign to all individual inputs. Therefore, while running the test, assertion error may be raised for selector value "30". But the default value for input "30" may have been intended by the designer.
