@@ -156,7 +156,7 @@ end
 ```
 
 ## Design Fix
-The state transition from SEQ_1 has been corrected. The bug-free design(relatively speaking) is in the file "seq_detect_1011_fixed.v" .
+The state transition from both states SEQ_1 and SEQ_101 have been corrected. The bug-free design(relatively speaking) is in the file "seq_detect_1011_fixed.v" .
 
 
 ![Screenshot from 2022-08-01 11-10-04](https://user-images.githubusercontent.com/41594627/182133102-f7e03eb6-548a-4415-8685-25389ce92e23.png)
