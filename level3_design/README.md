@@ -9,3 +9,9 @@ The technique used in this test is the equivalence check. Equivalence check invo
 
 ### Verification Environment
 This test is a [CoCoTb](https://www.cocotb.org/) Python based test.
+- A random 4-bit number representing the four request line was generated. This number was thenn assigned to the request port of the DUT and the golden model
+
+```
+request_queue_tb = random.randint(0,15)       #a 4-bit number is generated for the four request lines
+dut.request_queue.value = request_queue_tb    #assign the number to the request line of the DUT
+```
