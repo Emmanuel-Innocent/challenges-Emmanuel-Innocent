@@ -167,4 +167,5 @@ The state transition from both states SEQ_1 and SEQ_101 have been corrected. The
 
 
 ## Is The Verification Complete?
-Yes, the verification is complete for the state transition of the FSM.
+The test was carried out to verify only the functionality(behaviour) of the DUT. No verification on the timing analysis was done.
+So, yes, the verification is complete for the state transition of the FSM.
