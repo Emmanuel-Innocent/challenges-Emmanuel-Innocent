@@ -25,13 +25,13 @@ input clk, reset;
 input [3:0] request_queue;
 output [3:0] grant_out;
 
-localparam [2:0]
-               req_line_1 = 1,
-               req_line_2 = 2,
-               req_line_3 = 3,
-               req_line_4 = 4;
+  localparam [1:0]
+               req_line_1 = 0,
+               req_line_2 = 1,
+               req_line_3 = 2,
+               req_line_4 = 3;
 
-reg [2:0] current_state, next_state;
+  reg [1:0] current_state, next_state;
 reg [3:0] token; // a one-hot ring counter output --- serves as a token
 reg enable;
 integer time_counter = 0;  //helps count 3 seconds
