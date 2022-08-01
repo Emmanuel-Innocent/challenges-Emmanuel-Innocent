@@ -136,3 +136,6 @@ On checking the assignment for selector value 1100 and '01101', it was discovere
  ```
 ## Design Fix
 The design has been fix with the correct assignments. The fixed design is in the file mux_fixed.v.
+
+## Is The Verification Complete?
+Yes, the DUT was tested for all valid inputs(the selector and MUX input).
