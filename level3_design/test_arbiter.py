@@ -12,7 +12,7 @@ from cocotb.binary import BinaryValue
 async def test_seq_bug1(dut):
     """Test for round robin arbiter """
 
-    # Create a 10us period clock on port clk:
+    # Create a 10ns period clock on port clk:
     #this arbiter was design for a 50MHz clock
     #so a period of 20ns is needed
     clock = Clock(dut.clk, 20, units="ns")  
@@ -29,8 +29,8 @@ async def test_seq_bug1(dut):
     cocotb.log.info('#### CTB: Here is my verification test ######')
     
     while (cycle < 5):
-        request_queue_tb = random.randint(0,15)  #a 4-bit number is generated for the four request lines
-        dut.request_queue.value = request_queue_tb
+        request_queue_tb = random.randint(0,15)       #a 4-bit number is generated for the four request lines
+        dut.request_queue.value = request_queue_tb    #assign the number to the request line of the DUT
         E = 0b1   #enable line
         
         #this computes the ideal token value to be compared with the token value from the DUT
