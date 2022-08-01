@@ -46,7 +46,14 @@ async def test_mux(dut):
     dut.inp27.value = inp_test[27]
     dut.inp28.value = inp_test[28]
     dut.inp29.value = inp_test[29]
-    dut.inp30.value = inp_test[30]
+    dut.inp30.value = inp_test[30]   # <=== line A
+    #dut.inp30.value = 0b0           # <=== line B
+    #Please comment line A and uncomment line B 
+    #to avoid raising error for selecor value "30 (11110)"
+    #in the design selector value "30" was not assigned a unique value, but the default value: '0'.
+    #This may not be a bug, it may have been intended by the designer
+    #but the the test sees it as a bug.
+    #This is beacuse in the verification test a value was assigned to individual input
     
 
     #out_test = [inp_test[index] for index in range(32)]
