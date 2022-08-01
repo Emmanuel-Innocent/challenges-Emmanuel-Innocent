@@ -139,7 +139,7 @@ The design has been fix with the correct assignments. The fixed design is in the
 
 
 ![Screenshot from 2022-08-01 11-12-49](https://user-images.githubusercontent.com/41594627/182134087-56ab608d-5746-4275-8b58-b470fa02fc1d.png)
-** Fig.3 A screenshot showing all test cases passed after the bugs were fixed.**
+**Fig.3 A screenshot showing all test cases passed after the bugs were fixed.**
 
 
 
