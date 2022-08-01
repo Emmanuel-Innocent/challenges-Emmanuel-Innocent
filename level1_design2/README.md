@@ -136,3 +136,7 @@ From the three results above, it is observed that an **assertion error** is usua
 
 ## Design Fix
 The state transition from SEQ_1 has been corrected. The bug-free design(relatively speaking) is in the file "seq_detect_1011_fixed.v" .
+
+
+## Is The Verification Complete?
+Yes, the verification is complete for the state transition of the FSM.
