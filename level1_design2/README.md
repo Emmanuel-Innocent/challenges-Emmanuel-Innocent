@@ -13,7 +13,7 @@ The states of the "golden model" were encoded as a 3-bit states, then logic func
 ### Verification Environment
 This test is a [CoCoTb](https://www.cocotb.org/) Python based test.
 
-- After imporing the relevant libraries, both the DUT were initialised to a known state (IDLE STATE)
+- After importing the relevant libraries, both the DUT were initialised to a known state (IDLE STATE)
 
 ```
 # reset
