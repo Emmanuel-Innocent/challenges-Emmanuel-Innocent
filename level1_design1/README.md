@@ -137,5 +137,11 @@ On checking the assignment for selector value 1100 and '01101', it was discovere
 ## Design Fix
 The design has been fix with the correct assignments. The fixed design is in the file "mux_fixed.v".
 
+
+![Screenshot from 2022-08-01 11-12-49](https://user-images.githubusercontent.com/41594627/182134087-56ab608d-5746-4275-8b58-b470fa02fc1d.png)
+
+
+
+
 ## Is The Verification Complete?
-Yes, the DUT was tested for all valid inputs(the selector and MUX input).
+Yes it is. The DUT was tested for all valid inputs(the selector and MUX input). However, with how the test was designed selector value "30 (11110)" may be seen as having a bug. This is because in the design no unique value was assigned for selector value "30", it was assigned a default value '0'. But in the test module in order to capture all the possible bugs, a random but constrained value was assign to all individual inputs. Therefore, while running the test, assertion error may be raised for selector value "30". But the default value for input "30" may have been intended by the designer.
