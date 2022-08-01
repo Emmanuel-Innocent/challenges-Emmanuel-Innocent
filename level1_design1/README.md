@@ -1,6 +1,6 @@
 # Multiplexer Design Verification
 ![Screenshot from 2022-07-30 11-44-34](https://user-images.githubusercontent.com/41594627/181907886-8d0b0b63-9384-43e4-8708-5a7792590389.png)
-                                                **fig.1 Screenshot showing my Gitpod id**
+                                                **Fig.1 Screenshot showing my Gitpod id**
 
 
 
@@ -9,7 +9,7 @@ The contrained random verification (CRV) strategy was used in the test of the mu
 
 
 ![Untitled Diagram drawio(1)](https://user-images.githubusercontent.com/41594627/182087295-93d9480f-d239-4f8c-b094-16f05cdf8452.png)
-                                                 **fig.2 A diagram showing the verification process**
+                                                 **Fig.2 A diagram showing the verification process**
 
 
 ### Verification Environment
@@ -139,7 +139,7 @@ The design has been fix with the correct assignments. The fixed design is in the
 
 
 ![Screenshot from 2022-08-01 11-12-49](https://user-images.githubusercontent.com/41594627/182134087-56ab608d-5746-4275-8b58-b470fa02fc1d.png)
-
+** Fig.3 A screenshot showing all test cases passed after the bugs were fixed.**
 
 
 
